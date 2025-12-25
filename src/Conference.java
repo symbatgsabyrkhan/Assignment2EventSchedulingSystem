@@ -1,11 +1,10 @@
-public class Conference extends Event{
-    private String topic;
-
-    public Conference(String title,String date, String topic){
-        super(title, date);
-        this.topic=topic;
+public class Conference extends Event {
+    public Conference(String name, String date, int capacity) {
+        super(name, date, capacity);
     }
-    public String getTopic(){
-        return topic;
+
+    @Override
+    public void displayType() {
+        System.out.println("Conference Event");
     }
 }

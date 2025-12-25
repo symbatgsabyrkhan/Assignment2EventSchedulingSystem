@@ -1,22 +1,70 @@
-public class Main{
-    public static void main(String[] args){
-        EventManager manager=new EventManager();
+import java.util.ArrayList;
+import java.util.List;
 
-        manager.addEvent(new Concert("Kairat Nurtas concert", "30-12-2025","Kairat Nurtas"));
-        manager.addEvent(new Conference("IT", "28-12-2025","Software Engineering"));
-        manager.addEvent(new Concert("Opera","27-12-2025","Tynda"));
+public class Main {
+    public static void main(String[] args) {
+        Event event1 = new Event("Kairat Nurtas concert", "2025-30-12", 200);
+        Event event2 = new Event("Opera Concert", "2025-29-12", 250);
+        Event event3 = new Event("Expo Exhibition", "2025-25-12", 100);
 
-        System.out.println("All events:");
-        manager.display();
+        List<Event> events = new ArrayList<>();
+        events.add(event1);
+        events.add(event2);
+        events.add(event3);
 
-        System.out.println("\nSearch 'Kairat Nurtas concert':");
-        System.out.println(manager.searchByTitle("Kairat Nurtas concert"));
+        for (int i = 0; i < events.size() - 1; i++) {
+            for (int j = i + 1; j < events.size(); j++) {
+                if (events.get(i).getCapacity() > events.get(j).getCapacity()) {
+                    Event temp = events.get(i);
+                    events.set(i, events.get(j));
+                    events.set(j, temp);
+                }
+            }
+        }
 
-        System.out.println("\nFilter by date '28-12-2025' :");
-        manager.filterByDate("28-12-2025").forEach(System.out::println);
+        List<Event> smallEvents = new ArrayList<>();
+        for (Event event : events) {
+            if (event.getCapacity() <= 150) {
+                smallEvents.add(event);
+            }
+        }
 
-        System.out.println("\nSorted by title:");
-        manager.sortByTitle();
-        manager.display();
+        System.out.println("All Events:");
+        for (Event event : events) {
+            System.out.println(event);
+        }
+
+        System.out.println("\nSmall Events:");
+        for (Event event : smallEvents) {
+            System.out.println(event);
+        }
+
+        Participant participant1 = new Participant("Symbat", "symbat0408@icloud.com");
+        Organizer organizer1 = new Organizer("Asel", "Astana");
+
+        System.out.println("\nParticipant Information:");
+        System.out.println(participant1);
+
+        System.out.println("\nOrganizer Information:");
+        System.out.println(organizer1);
+
+        Conference conference = new Conference("AI Conference", "2025-14-12", 300);
+        Concert concert = new Concert("Jazz Concert", "2026-02-01", 500);
+
+        System.out.println("\nEvent Types:");
+        conference.displayType();
+        concert.displayType();
+
+        System.out.println("\nComparing Events:");
+        System.out.println(event1.equals(event2));
+        System.out.println(event1.equals(event3));
+
+        EventManager manager = new EventManager();
+        manager.addEvent(event1);
+        manager.addEvent(event2);
+        manager.addEvent(conference);
+
+        System.out.println("\nEvent Manager:");
+        manager.displayAllEvents();
     }
 }

@@ -1,11 +1,10 @@
-public class Concert extends Event{
-    private String artist;
-
-    public Concert(String title,String date,String artist ){
-        super(title,date);
-        this.artist=artist;
+public class Concert extends Event {
+    public Concert(String name, String date, int capacity) {
+        super(name, date, capacity);
     }
-    public String getArtist(){
-        return artist;
+
+    @Override
+    public void displayType() {
+        System.out.println("Concert Event");
     }
 }
