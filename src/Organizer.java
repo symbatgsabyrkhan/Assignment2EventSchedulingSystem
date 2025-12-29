@@ -1,24 +1,15 @@
 import java.util.Objects;
 
-public class Organizer {
-    private String name;
+public class Organizer extends Person {
     private String location;
 
     public Organizer(String name, String location) {
-        this.name = name;
+        super(name);
         this.location = location;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public String getLocation() {
         return location;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public void setLocation(String location) {
@@ -26,8 +17,13 @@ public class Organizer {
     }
 
     @Override
+    String getRole() {
+        return "Organizer";
+    }
+
+    @Override
     public String toString() {
-        return "Organizer{name='" + name + "', location='" + location + "'}";
+        return "Organizer{name='" + getName() + "', location='" + location + "'}";
     }
 
     @Override
@@ -35,11 +31,11 @@ public class Organizer {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         Organizer organizer = (Organizer) obj;
-        return name.equals(organizer.name) && location.equals(organizer.location);
+        return getName().equals(organizer.getName()) && location.equals(organizer.location);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, location);
+        return Objects.hash(getName(), location);
     }
 }

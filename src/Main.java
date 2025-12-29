@@ -44,9 +44,11 @@ public class Main {
 
         System.out.println("\nParticipant Information:");
         System.out.println(participant1);
+        System.out.println("Role: " + participant1.getRole());
 
         System.out.println("\nOrganizer Information:");
         System.out.println(organizer1);
+        System.out.println("Role: " + organizer1.getRole());
 
         Conference conference = new Conference("AI Conference", "2025-14-12", 300);
         Concert concert = new Concert("Jazz Concert", "2026-02-01", 500);
@@ -66,5 +68,13 @@ public class Main {
 
         System.out.println("\nEvent Manager:");
         manager.displayAllEvents();
+
+        System.out.println("\nRegistration Demo:");
+        event1.register(participant1);
+        event1.register(organizer1);
+        System.out.println("Total registered for " + event1.getName() + ": " + event1.getRegisteredCount());
+
+        System.out.println("\nConference Info:");
+        conference.displayConferenceInfo();
     }
 }

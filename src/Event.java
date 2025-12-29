@@ -1,14 +1,18 @@
 import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Event {
+public class Event implements Registrable {
     private String name;
     private String date;
     private int capacity;
+    private List<Person> registeredPeople;
 
     public Event(String name, String date, int capacity) {
         this.name = name;
         this.date = date;
         this.capacity = capacity;
+        this.registeredPeople = new ArrayList<>();
     }
 
     public String getName() {
@@ -36,6 +40,23 @@ public class Event {
     }
 
     @Override
+    public void register(Participant participant) {
+        registeredPeople.add(participant);
+        System.out.println(participant.getName() + " registered as participant");
+    }
+
+    @Override
+    public void register(Organizer organizer) {
+        registeredPeople.add(organizer);
+        System.out.println(organizer.getName() + " registered as organizer");
+    }
+
+    @Override
+    public int getRegisteredCount() {
+        return registeredPeople.size();
+    }
+
+    @Override
     public String toString() {
         return "Event{name='" + name + "', date='" + date + "', capacity=" + capacity + "}";
     }
@@ -57,4 +78,3 @@ public class Event {
         System.out.println("Generic Event");
     }
 }
-

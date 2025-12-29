@@ -7,4 +7,8 @@ public class Conference extends Event {
     public void displayType() {
         System.out.println("Conference Event");
     }
+
+    public final void displayConferenceInfo() {
+        System.out.println("This is a conference event with capacity: " + getCapacity());
+    }
 }
