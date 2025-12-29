@@ -1,24 +1,15 @@
 import java.util.Objects;
 
-public class Participant {
-    private String name;
+public class Participant extends Person {
     private String email;
 
     public Participant(String name, String email) {
-        this.name = name;
+        super(name);
         this.email = email;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public String getEmail() {
         return email;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public void setEmail(String email) {
@@ -26,8 +17,13 @@ public class Participant {
     }
 
     @Override
+    String getRole() {
+        return "Participant";
+    }
+
+    @Override
     public String toString() {
-        return "Participant{name='" + name + "', email='" + email + "'}";
+        return "Participant{name='" + getName() + "', email='" + email + "'}";
     }
 
     @Override
@@ -35,11 +31,11 @@ public class Participant {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         Participant participant = (Participant) obj;
-        return name.equals(participant.name) && email.equals(participant.email);
+        return getName().equals(participant.getName()) && email.equals(participant.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, email);
+        return Objects.hash(getName(), email);
     }
 }

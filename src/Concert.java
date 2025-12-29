@@ -1,4 +1,4 @@
-public class Concert extends Event {
+public final class Concert extends Event {
     public Concert(String name, String date, int capacity) {
         super(name, date, capacity);
     }
