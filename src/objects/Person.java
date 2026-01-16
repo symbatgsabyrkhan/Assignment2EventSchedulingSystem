@@ -1,3 +1,5 @@
+package objects;
+
 public abstract class Person {
     private String name;
 
@@ -13,5 +15,5 @@ public abstract class Person {
         this.name = name;
     }
 
-    abstract String getRole();
+    public abstract String getRole();
 }

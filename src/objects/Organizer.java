@@ -1,3 +1,5 @@
+package objects;
+
 import java.util.Objects;
 
 public class Organizer extends Person {
@@ -17,13 +19,13 @@ public class Organizer extends Person {
     }
 
     @Override
-    String getRole() {
-        return "Organizer";
+    public String getRole() {
+        return "objects.Organizer";
     }
 
     @Override
     public String toString() {
-        return "Organizer{name='" + getName() + "', location='" + location + "'}";
+        return "objects.Organizer{name='" + getName() + "', location='" + location + "'}";
     }
 
     @Override

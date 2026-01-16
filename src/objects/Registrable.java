@@ -1,3 +1,5 @@
+package objects;
+
 public interface Registrable {
     void register(Participant participant);
     void register(Organizer organizer);

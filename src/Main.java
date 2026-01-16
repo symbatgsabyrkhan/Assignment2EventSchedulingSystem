@@ -1,16 +1,31 @@
+package main;
+
+import database.EventDAO;
+import database.LocationDAO;
+import database.PersonDAO;
+import objects.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        Event event1 = new Event("Kairat Nurtas concert", "2025-30-12", 200);
-        Event event2 = new Event("Opera Concert", "2025-29-12", 250);
-        Event event3 = new Event("Expo Exhibition", "2025-25-12", 100);
+        EventDAO eventDao = new EventDAO();
+        LocationDAO locDao = new LocationDAO();
+        PersonDAO personDao = new PersonDAO();
 
-        List<Event> events = new ArrayList<>();
-        events.add(event1);
-        events.add(event2);
-        events.add(event3);
+        eventDao.save(new Event("Kairat Nurtas concert", "2025-30-12", 200));
+        eventDao.save(new Event("Opera Concert", "2025-29-12", 250));
+        eventDao.save(new Event("Expo Exhibition", "2025-25-12", 100));
+        eventDao.save(new Conference("AI Conference", "2025-14-12", 300));
+
+        personDao.savePerson(new Participant("Symbat", "symbat0408@icloud.com"), "symbat0408@icloud.com");
+        personDao.savePerson(new Organizer("Asel", "Astana"), "Astana");
+        locDao.insert("Astana", "Mangilik El 55");
+
+        List<Event> events = eventDao.getAll();
+        Participant kairatParticipant = personDao.getParticipantByName("Symbat");
+        Organizer aselOrganizer = personDao.getOrganizerByName("Asel");
+        Conference aiConference = eventDao.getEventByName("AI Conference");
 
         for (int i = 0; i < events.size() - 1; i++) {
             for (int j = i + 1; j < events.size(); j++) {
@@ -22,59 +37,33 @@ public class Main {
             }
         }
 
-        List<Event> smallEvents = new ArrayList<>();
-        for (Event event : events) {
-            if (event.getCapacity() <= 150) {
-                smallEvents.add(event);
-            }
+        System.out.println("--- All Events from DB ---");
+        events.forEach(System.out::println);
+
+        System.out.println("\n--- Participant Info from DB ---");
+        if (kairatParticipant != null) {
+            System.out.println(kairatParticipant);
+            System.out.println("Role: " + kairatParticipant.getRole());
         }
 
-        System.out.println("All Events:");
-        for (Event event : events) {
-            System.out.println(event);
+        System.out.println("\n--- Organizer Info from DB ---");
+        if (aselOrganizer != null) {
+            System.out.println(aselOrganizer);
+            System.out.println("Role: " + aselOrganizer.getRole());
         }
 
-        System.out.println("\nSmall Events:");
-        for (Event event : smallEvents) {
-            System.out.println(event);
+        System.out.println("\n--- Conference Info from DB ---");
+        if (aiConference != null) {
+            aiConference.displayType();
+            aiConference.displayConferenceInfo();
         }
 
-        Participant participant1 = new Participant("Symbat", "symbat0408@icloud.com");
-        Organizer organizer1 = new Organizer("Asel", "Astana");
+        eventDao.update("Kairat Nurtas concert", 600);
 
-        System.out.println("\nParticipant Information:");
-        System.out.println(participant1);
-        System.out.println("Role: " + participant1.getRole());
+        System.out.println("\n--- Deleting Opera Concert ---");
+        eventDao.deleteEvent("Opera Concert");
 
-        System.out.println("\nOrganizer Information:");
-        System.out.println(organizer1);
-        System.out.println("Role: " + organizer1.getRole());
-
-        Conference conference = new Conference("AI Conference", "2025-14-12", 300);
-        Concert concert = new Concert("Jazz Concert", "2026-02-01", 500);
-
-        System.out.println("\nEvent Types:");
-        conference.displayType();
-        concert.displayType();
-
-        System.out.println("\nComparing Events:");
-        System.out.println(event1.equals(event2));
-        System.out.println(event1.equals(event3));
-
-        EventManager manager = new EventManager();
-        manager.addEvent(event1);
-        manager.addEvent(event2);
-        manager.addEvent(conference);
-
-        System.out.println("\nEvent Manager:");
-        manager.displayAllEvents();
-
-        System.out.println("\nRegistration Demo:");
-        event1.register(participant1);
-        event1.register(organizer1);
-        System.out.println("Total registered for " + event1.getName() + ": " + event1.getRegisteredCount());
-
-        System.out.println("\nConference Info:");
-        conference.displayConferenceInfo();
+        System.out.println("\n--- Final DB State after Update and Delete ---");
+        eventDao.getAll().forEach(System.out::println);
     }
 }

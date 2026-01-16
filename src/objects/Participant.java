@@ -1,3 +1,5 @@
+package objects;
+
 import java.util.Objects;
 
 public class Participant extends Person {
@@ -17,13 +19,13 @@ public class Participant extends Person {
     }
 
     @Override
-    String getRole() {
-        return "Participant";
+    public String getRole() {
+        return "objects.Participant";
     }
 
     @Override
     public String toString() {
-        return "Participant{name='" + getName() + "', email='" + email + "'}";
+        return "objects.Participant{name='" + getName() + "', email='" + email + "'}";
     }
 
     @Override

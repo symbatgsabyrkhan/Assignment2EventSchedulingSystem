@@ -1,3 +1,5 @@
+package objects;
+
 import java.util.Objects;
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +60,7 @@ public class Event implements Registrable {
 
     @Override
     public String toString() {
-        return "Event{name='" + name + "', date='" + date + "', capacity=" + capacity + "}";
+        return "objects.Event{name='" + name + "', date='" + date + "', capacity=" + capacity + "}";
     }
 
     @Override
@@ -75,6 +77,6 @@ public class Event implements Registrable {
     }
 
     public void displayType() {
-        System.out.println("Generic Event");
+        System.out.println("Generic objects.Event");
     }
 }

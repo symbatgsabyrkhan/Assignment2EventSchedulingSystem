@@ -1,3 +1,5 @@
+package objects;
+
 public class Conference extends Event {
     public Conference(String name, String date, int capacity) {
         super(name, date, capacity);
@@ -5,7 +7,7 @@ public class Conference extends Event {
 
     @Override
     public void displayType() {
-        System.out.println("Conference Event");
+        System.out.println("objects.Conference objects.Event");
     }
 
     public final void displayConferenceInfo() {

@@ -1,3 +1,5 @@
+package objects;
+
 public final class Concert extends Event {
     public Concert(String name, String date, int capacity) {
         super(name, date, capacity);
@@ -5,6 +7,6 @@ public final class Concert extends Event {
 
     @Override
     public void displayType() {
-        System.out.println("Concert Event");
+        System.out.println("objects.Concert objects.Event");
     }
 }
